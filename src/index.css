@@ -2,39 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* EduConnect Global Design System
+Primary: Deep Blue #2D3E50, Secondary: Sky Blue #4FC3F7, Accent: Warm Yellow #FFC107
+Typography: Inter with medium weight, line-height 1.5, letter-spacing -1px
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    /* Base colors */
+    --background: 210 20% 98%;
+    --foreground: 210 22% 22%;
+    
+    /* Card system */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 210 22% 22%;
+    
+    /* Popover system */
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --popover-foreground: 210 22% 22%;
+    
+    /* Primary - Deep Blue #2D3E50 */
+    --primary: 210 22% 22%;
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 210 25% 18%;
+    
+    /* Secondary - Sky Blue #4FC3F7 */
+    --secondary: 197 92% 61%;
+    --secondary-foreground: 210 22% 22%;
+    --secondary-hover: 197 95% 55%;
+    
+    /* Accent - Warm Yellow #FFC107 */
+    --accent: 45 100% 51%;
+    --accent-foreground: 210 22% 22%;
+    --accent-hover: 45 100% 45%;
+    
+    /* Supporting colors */
+    --muted: 210 40% 96%;
+    --muted-foreground: 210 12% 47%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 210 32% 92%;
+    --input: 210 32% 92%;
+    --ring: 210 22% 22%;
+    
+    /* Success and info */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+    --info: 197 92% 61%;
+    --info-foreground: 210 22% 22%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(210 22% 22%), hsl(197 92% 61%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 20% 98%));
+    --gradient-accent: linear-gradient(90deg, hsl(45 100% 51%), hsl(35 100% 55%));
+    
+    /* Shadows */
+    --shadow-soft: 0 2px 10px -3px hsl(210 22% 22% / 0.08);
+    --shadow-medium: 0 4px 20px -6px hsl(210 22% 22% / 0.12);
+    --shadow-large: 0 8px 30px -12px hsl(210 22% 22% / 0.15);
+    --shadow-glow: 0 0 0 1px hsl(197 92% 61% / 0.2);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --radius: 0.5rem;
 
@@ -56,41 +89,70 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Base colors - dark mode */
+    --background: 210 22% 8%;
+    --foreground: 210 20% 95%;
+    
+    /* Card system - dark mode */
+    --card: 210 22% 12%;
+    --card-foreground: 210 20% 95%;
+    
+    /* Popover system - dark mode */
+    --popover: 210 22% 12%;
+    --popover-foreground: 210 20% 95%;
+    
+    /* Primary - adjusted for dark mode */
+    --primary: 197 92% 61%;
+    --primary-foreground: 210 22% 8%;
+    --primary-hover: 197 95% 55%;
+    
+    /* Secondary - adjusted for dark mode */
+    --secondary: 210 22% 18%;
+    --secondary-foreground: 210 20% 95%;
+    --secondary-hover: 210 25% 22%;
+    
+    /* Accent - warm yellow for dark mode */
+    --accent: 45 100% 51%;
+    --accent-foreground: 210 22% 8%;
+    --accent-hover: 45 100% 45%;
+    
+    /* Supporting colors - dark mode */
+    --muted: 210 22% 16%;
+    --muted-foreground: 210 12% 65%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 95%;
+    
+    --border: 210 22% 20%;
+    --input: 210 22% 20%;
+    --ring: 197 92% 61%;
+    
+    /* Success and info - dark mode */
+    --success: 142 76% 45%;
+    --success-foreground: 210 22% 8%;
+    --info: 197 92% 61%;
+    --info-foreground: 210 22% 8%;
+    
+    /* Gradients - dark mode */
+    --gradient-hero: linear-gradient(135deg, hsl(210 22% 12%), hsl(197 92% 61%));
+    --gradient-card: linear-gradient(145deg, hsl(210 22% 12%), hsl(210 22% 8%));
+    --gradient-accent: linear-gradient(90deg, hsl(45 100% 51%), hsl(35 100% 55%));
+    
+    /* Shadows - dark mode */
+    --shadow-soft: 0 2px 10px -3px hsl(0 0% 0% / 0.3);
+    --shadow-medium: 0 4px 20px -6px hsl(0 0% 0% / 0.4);
+    --shadow-large: 0 8px 30px -12px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 0 1px hsl(197 92% 61% / 0.3);
+    
+    /* Sidebar - dark mode */
+    --sidebar-background: 210 22% 10%;
+    --sidebar-foreground: 210 20% 95%;
+    --sidebar-primary: 197 92% 61%;
+    --sidebar-primary-foreground: 210 22% 8%;
+    --sidebar-accent: 210 22% 16%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 210 22% 20%;
+    --sidebar-ring: 197 92% 61%;
   }
 }
 
@@ -100,6 +162,54 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: -0.025em;
+  }
+}
+
+@layer components {
+  /* Custom component styles using design system */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .card-gradient {
+    background: var(--gradient-card);
+  }
+  
+  .accent-gradient {
+    background: var(--gradient-accent);
+  }
+  
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .shadow-large {
+    box-shadow: var(--shadow-large);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+  
+  .glass-effect {
+    background: hsl(var(--card) / 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.5);
   }
 }
