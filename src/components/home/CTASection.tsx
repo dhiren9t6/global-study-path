@@ -7,13 +7,13 @@ export function CTASection() {
   const navigate = useNavigate();
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-secondary to-accent relative overflow-hidden">
+    <section className="py-16 md:py-24 relative overflow-hidden" style={{ background: 'var(--gradient-blue)' }}>
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.5))]" />
       
       <div className="container relative px-4">
         <div className="mx-auto max-w-4xl text-center text-white">
-          <Badge className="mb-6 bg-white/20 text-white border-white/20 hover:bg-white/30">
+          <Badge className="mb-6 glass-badge text-white rounded-full">
             <Sparkles className="mr-1 h-3 w-3" />
             Start Your Journey Today
           </Badge>
@@ -30,7 +30,7 @@ export function CTASection() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button 
               size="lg" 
-              className="group bg-white text-primary hover:bg-white/90 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="group glass-button text-primary font-semibold hover:scale-105 shadow-lg rounded-2xl"
               onClick={() => navigate('/signup?type=student')}
             >
               <User className="mr-2 h-5 w-5" />
@@ -41,7 +41,7 @@ export function CTASection() {
             <Button 
               size="lg" 
               variant="outline"
-              className="group border-2 border-white/30 bg-white/10 text-white hover:bg-white hover:text-primary backdrop-blur-sm transition-all duration-300"
+              className="group glass-button text-white font-semibold hover:scale-105 hover:text-primary rounded-2xl"
               onClick={() => navigate('/signup?type=university')}
             >
               <Building2 className="mr-2 h-5 w-5" />
@@ -51,16 +51,16 @@ export function CTASection() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-            <div className="p-4">
-              <div className="text-2xl font-bold mb-1">Free to Start</div>
+            <div className="glass-card-light p-6 rounded-2xl">
+              <div className="text-2xl font-bold mb-1 text-white">Free to Start</div>
               <div className="text-white/80 text-sm">No hidden costs or setup fees</div>
             </div>
-            <div className="p-4">
-              <div className="text-2xl font-bold mb-1">24/7 Support</div>
+            <div className="glass-card-light p-6 rounded-2xl">
+              <div className="text-2xl font-bold mb-1 text-white">24/7 Support</div>
               <div className="text-white/80 text-sm">Get help whenever you need it</div>
             </div>
-            <div className="p-4">
-              <div className="text-2xl font-bold mb-1">Global Network</div>
+            <div className="glass-card-light p-6 rounded-2xl">
+              <div className="text-2xl font-bold mb-1 text-white">Global Network</div>
               <div className="text-white/80 text-sm">Connect across 150+ countries</div>
             </div>
           </div>

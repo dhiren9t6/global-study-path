@@ -101,7 +101,7 @@ interface BenefitCardProps {
 function BenefitCard({ benefit, index }: BenefitCardProps) {
   return (
     <Card 
-      className="group h-full border-border/50 bg-card/50 backdrop-blur-sm hover:bg-card hover:shadow-medium hover:border-border transition-all duration-300 hover:-translate-y-1"
+      className="group h-full glass-card-light hover:glass-card-strong hover:shadow-medium transition-all duration-300 hover:-translate-y-1 rounded-2xl"
       style={{
         animationDelay: `${index * 100}ms`,
         animation: 'fade-in 0.6s ease-out forwards'
@@ -126,12 +126,12 @@ function BenefitCard({ benefit, index }: BenefitCardProps) {
 
 export function BenefitsSection() {
   return (
-    <section className="py-16 md:py-24 bg-muted/30">
+    <section className="py-16 md:py-24 relative overflow-hidden" style={{ background: 'var(--gradient-white)' }}>
       <div className="container px-4">
         {/* Students Section */}
         <div className="mb-20">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-secondary/10 text-secondary border-secondary/20">
+            <Badge className="mb-4 glass-badge rounded-full">
               <BookOpen className="mr-1 h-3 w-3" />
               For Students
             </Badge>
@@ -154,7 +154,7 @@ export function BenefitsSection() {
         {/* Universities Section */}
         <div>
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+            <Badge className="mb-4 glass-badge rounded-full">
               <Building2 className="mr-1 h-3 w-3" />
               For Universities
             </Badge>

@@ -88,7 +88,7 @@ export function HeroSection() {
             {stats.map((stat, index) => (
               <div 
                 key={stat.label}
-                className="group p-4 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 hover:bg-card hover:shadow-medium transition-all duration-300"
+                className="group glass-card-light p-6 rounded-2xl hover:glass-card-strong hover:shadow-medium hover:scale-105 transition-all duration-300"
                 style={{
                   animationDelay: `${index * 100}ms`,
                   animation: 'fade-in 0.6s ease-out forwards'
@@ -109,22 +109,22 @@ export function HeroSection() {
           <div className="mt-16 relative">
             <p className="text-center text-white/80 mb-8 text-sm font-medium">Trusted by leading universities worldwide</p>
             <div className="flex flex-wrap justify-center items-center gap-8 opacity-80">
-              <div className="h-12 w-32 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center text-white font-semibold border border-white/20">
+              <div className="glass-card-light h-12 w-32 rounded-2xl flex items-center justify-center text-white font-semibold hover:scale-105 transition-all duration-300">
                 Harvard
               </div>
-              <div className="h-12 w-32 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center text-white font-semibold border border-white/20">
+              <div className="glass-card-light h-12 w-32 rounded-2xl flex items-center justify-center text-white font-semibold hover:scale-105 transition-all duration-300">
                 Oxford
               </div>
-              <div className="h-12 w-32 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center text-white font-semibold border border-white/20">
+              <div className="glass-card-light h-12 w-32 rounded-2xl flex items-center justify-center text-white font-semibold hover:scale-105 transition-all duration-300">
                 MIT
               </div>
-              <div className="h-12 w-32 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center text-white font-semibold border border-white/20">
+              <div className="glass-card-light h-12 w-32 rounded-2xl flex items-center justify-center text-white font-semibold hover:scale-105 transition-all duration-300">
                 Stanford
               </div>
-              <div className="h-12 w-32 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center text-white font-semibold border border-white/20">
+              <div className="glass-card-light h-12 w-32 rounded-2xl flex items-center justify-center text-white font-semibold hover:scale-105 transition-all duration-300">
                 Cambridge
               </div>
-              <div className="h-12 w-32 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center text-white font-semibold border border-white/20">
+              <div className="glass-card-light h-12 w-32 rounded-2xl flex items-center justify-center text-white font-semibold hover:scale-105 transition-all duration-300">
                 ETH Zurich
               </div>
             </div>
