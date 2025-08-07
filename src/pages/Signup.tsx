@@ -21,11 +21,13 @@ import {
   Phone
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Signup() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { signUp } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -55,17 +57,37 @@ export default function Signup() {
 
     setIsLoading(true);
 
-    // Simulate signup process
-    setTimeout(() => {
-      setIsLoading(false);
-      toast({
-        title: "Account Created Successfully!",
-        description: `Welcome to EduConnect Global! Redirecting to your ${userType} dashboard.`,
-      });
+    try {
+      const { error } = await signUp(
+        formData.email, 
+        formData.password, 
+        userType as 'student' | 'university',
+        formData
+      );
       
-      // Redirect to appropriate dashboard
-      navigate(userType === 'student' ? '/student-dashboard' : '/university-dashboard');
-    }, 2000);
+      if (error) {
+        toast({
+          title: "Signup Failed",
+          description: error.message || "Failed to create account. Please try again.",
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Account Created Successfully!",
+          description: "Please check your email to verify your account.",
+        });
+        
+        navigate('/login?type=' + userType);
+      }
+    } catch (error) {
+      toast({
+        title: "Signup Failed",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

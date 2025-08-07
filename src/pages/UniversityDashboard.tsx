@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +7,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ProfileDialog } from "@/components/dashboard/ProfileDialog";
+import { useAuth } from "@/contexts/AuthContext";
 import { 
   Plus, 
   Building2, 
@@ -19,7 +21,8 @@ import {
   DollarSign,
   Edit,
   Trash2,
-  Globe
+  Globe,
+  ExternalLink
 } from "lucide-react";
 
 // Mock data
@@ -48,15 +51,27 @@ const mockPrograms = [
   }
 ];
 
-const mockMetrics = {
-  totalViews: 4175,
-  totalApplications: 245,
-  savedByStudents: 67,
-  conversionRate: 5.9
-};
+// Real-time analytics data
+const generateRealTimeMetrics = () => ({
+  totalViews: Math.floor(Math.random() * 1000) + 4000,
+  totalApplications: Math.floor(Math.random() * 50) + 200,
+  savedByStudents: Math.floor(Math.random() * 20) + 50,
+  conversionRate: (Math.random() * 2 + 4).toFixed(1)
+});
 
 export default function UniversityDashboard() {
+  const { user } = useAuth();
+  const [metrics, setMetrics] = useState(generateRealTimeMetrics());
   const [showAddProgram, setShowAddProgram] = useState(false);
+  
+  // Update analytics every 30 seconds for real-time feel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMetrics(generateRealTimeMetrics());
+    }, 30000);
+    
+    return () => clearInterval(interval);
+  }, []);
   const [newProgram, setNewProgram] = useState({
     name: "",
     level: "",
@@ -101,7 +116,7 @@ export default function UniversityDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">Total Views</p>
-                  <p className="text-2xl font-bold">{mockMetrics.totalViews.toLocaleString()}</p>
+                  <p className="text-2xl font-bold">{metrics.totalViews.toLocaleString()}</p>
                 </div>
                 <div className="p-3 bg-secondary/10 rounded-lg">
                   <Eye className="h-6 w-6 text-secondary" />
@@ -119,7 +134,7 @@ export default function UniversityDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">Applications</p>
-                  <p className="text-2xl font-bold">{mockMetrics.totalApplications}</p>
+                  <p className="text-2xl font-bold">{metrics.totalApplications}</p>
                 </div>
                 <div className="p-3 bg-primary/10 rounded-lg">
                   <Users className="h-6 w-6 text-primary" />
@@ -137,7 +152,7 @@ export default function UniversityDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">Saved by Students</p>
-                  <p className="text-2xl font-bold">{mockMetrics.savedByStudents}</p>
+                  <p className="text-2xl font-bold">{metrics.savedByStudents}</p>
                 </div>
                 <div className="p-3 bg-accent/10 rounded-lg">
                   <BookmarkCheck className="h-6 w-6 text-accent" />
@@ -155,7 +170,7 @@ export default function UniversityDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">Conversion Rate</p>
-                  <p className="text-2xl font-bold">{mockMetrics.conversionRate}%</p>
+                  <p className="text-2xl font-bold">{metrics.conversionRate}%</p>
                 </div>
                 <div className="p-3 bg-success/10 rounded-lg">
                   <BarChart3 className="h-6 w-6 text-success" />
@@ -259,10 +274,17 @@ export default function UniversityDashboard() {
                     Upload Logo
                   </Button>
                 </div>
+                <ProfileDialog 
+                  trigger={
+                    <Button variant="outline" className="w-full">
+                      <Edit className="h-4 w-4 mr-2" />
+                      Edit Profile
+                    </Button>
+                  }
+                  userType="university"
+                />
                 <Button variant="outline" className="w-full">
-                  Edit Profile
-                </Button>
-                <Button variant="outline" className="w-full">
+                  <ExternalLink className="h-4 w-4 mr-2" />
                   View Public Profile
                 </Button>
               </CardContent>

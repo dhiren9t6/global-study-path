@@ -11,10 +11,11 @@ import {
   Building2
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface HeaderProps {
   isAuthenticated?: boolean;
-  userType?: 'student' | 'university';
+  userType?: 'student' | 'university' | null;
   onToggleTheme?: () => void;
   isDark?: boolean;
 }
@@ -22,9 +23,15 @@ interface HeaderProps {
 export function Header({ isAuthenticated = false, userType, onToggleTheme, isDark }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { signOut } = useAuth();
 
   const handleAuthClick = (type: 'student' | 'university') => {
     navigate(`/login?type=${type}`);
+  };
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/');
   };
 
   return (
@@ -104,7 +111,7 @@ export function Header({ isAuthenticated = false, userType, onToggleTheme, isDar
               >
                 Dashboard
               </Button>
-              <Button variant="ghost">Logout</Button>
+              <Button variant="ghost" onClick={handleLogout}>Logout</Button>
             </div>
           )}
 
@@ -188,7 +195,7 @@ export function Header({ isAuthenticated = false, userType, onToggleTheme, isDar
                   >
                     Dashboard
                   </Button>
-                  <Button variant="ghost" className="justify-start">
+                  <Button variant="ghost" className="justify-start" onClick={handleLogout}>
                     Logout
                   </Button>
                 </div>

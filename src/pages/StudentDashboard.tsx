@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ProfileDialog } from "@/components/dashboard/ProfileDialog";
+import { useAuth } from "@/contexts/AuthContext";
 import { 
   Upload, 
   FileText, 
@@ -21,7 +23,9 @@ import {
   ExternalLink,
   Bookmark,
   BookmarkCheck,
-  GraduationCap
+  GraduationCap,
+  User,
+  Settings
 } from "lucide-react";
 
 // Mock data
@@ -65,6 +69,7 @@ const mockUniversities = [
 ];
 
 export default function StudentDashboard() {
+  const { user } = useAuth();
   const [documents, setDocuments] = useState([
     { name: "Academic Transcripts", status: "uploaded", file: "transcripts.pdf" },
     { name: "CV/Resume", status: "uploaded", file: "resume.pdf" },
@@ -99,7 +104,9 @@ export default function StudentDashboard() {
       <div className="container py-8 px-4">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Welcome back, Sarah!</h1>
+          <h1 className="text-3xl font-bold text-foreground mb-2">
+            Welcome back, {user?.user_metadata?.full_name || 'Student'}!
+          </h1>
           <p className="text-muted-foreground">Continue your journey to global education</p>
         </div>
 
@@ -123,9 +130,15 @@ export default function StudentDashboard() {
                   </div>
                   <Progress value={profileCompleteness} className="h-2" />
                 </div>
-                <Button variant="outline" className="w-full">
-                  Complete Profile
-                </Button>
+                <ProfileDialog 
+                  trigger={
+                    <Button variant="outline" className="w-full">
+                      <Settings className="h-4 w-4 mr-2" />
+                      Complete Profile
+                    </Button>
+                  }
+                  userType="student"
+                />
               </CardContent>
             </Card>
 

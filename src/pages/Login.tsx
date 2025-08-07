@@ -18,11 +18,13 @@ import {
   Lock
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Login() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { signIn } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -36,17 +38,32 @@ export default function Login() {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate login process
-    setTimeout(() => {
-      setIsLoading(false);
-      toast({
-        title: "Login Successful!",
-        description: `Welcome back! Redirecting to your ${userType} dashboard.`,
-      });
+    try {
+      const { error } = await signIn(formData.email, formData.password, userType as 'student' | 'university');
       
-      // Redirect to appropriate dashboard
-      navigate(userType === 'student' ? '/student-dashboard' : '/university-dashboard');
-    }, 1500);
+      if (error) {
+        toast({
+          title: "Login Failed",
+          description: error.message || "Invalid credentials. Please try again.",
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Login Successful!",
+          description: `Welcome back! Redirecting to your ${userType} dashboard.`,
+        });
+        
+        navigate(userType === 'student' ? '/student-dashboard' : '/university-dashboard');
+      }
+    } catch (error) {
+      toast({
+        title: "Login Failed",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
