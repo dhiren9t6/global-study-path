@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import StudentDashboard from "./pages/StudentDashboard";
 import UniversityDashboard from "./pages/UniversityDashboard";
+import AnalyticsDashboard from "./pages/AnalyticsDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -51,6 +52,14 @@ function AppContent() {
             element={
               <ProtectedRoute requiredUserType="university">
                 <UniversityDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/analytics" 
+            element={
+              <ProtectedRoute requiredUserType="university">
+                <AnalyticsDashboard />
               </ProtectedRoute>
             } 
           />
