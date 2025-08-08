@@ -14,7 +14,134 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      university_analytics_events: {
+        Row: {
+          actor_id: string | null
+          created_at: string
+          event_type: string
+          id: string
+          metadata: Json
+          program_id: string | null
+          university_id: string
+        }
+        Insert: {
+          actor_id?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          metadata?: Json
+          program_id?: string | null
+          university_id: string
+        }
+        Update: {
+          actor_id?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          metadata?: Json
+          program_id?: string | null
+          university_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "university_analytics_events_program_id_fkey"
+            columns: ["program_id"]
+            isOneToOne: false
+            referencedRelation: "university_programs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      university_profiles: {
+        Row: {
+          banner_url: string | null
+          contact_email: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_published: boolean
+          location: string | null
+          logo_url: string | null
+          name: string
+          phone: string | null
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          banner_url?: string | null
+          contact_email?: string | null
+          created_at?: string
+          description?: string | null
+          id: string
+          is_published?: boolean
+          location?: string | null
+          logo_url?: string | null
+          name: string
+          phone?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          banner_url?: string | null
+          contact_email?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_published?: boolean
+          location?: string | null
+          logo_url?: string | null
+          name?: string
+          phone?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
+      university_programs: {
+        Row: {
+          application_deadline: string | null
+          created_at: string
+          degree_level: string | null
+          delivery_mode: string | null
+          description: string | null
+          duration: string | null
+          id: string
+          is_published: boolean
+          title: string
+          tuition_fee: string | null
+          university_id: string
+          updated_at: string
+        }
+        Insert: {
+          application_deadline?: string | null
+          created_at?: string
+          degree_level?: string | null
+          delivery_mode?: string | null
+          description?: string | null
+          duration?: string | null
+          id?: string
+          is_published?: boolean
+          title: string
+          tuition_fee?: string | null
+          university_id: string
+          updated_at?: string
+        }
+        Update: {
+          application_deadline?: string | null
+          created_at?: string
+          degree_level?: string | null
+          delivery_mode?: string | null
+          description?: string | null
+          duration?: string | null
+          id?: string
+          is_published?: boolean
+          title?: string
+          tuition_fee?: string | null
+          university_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
