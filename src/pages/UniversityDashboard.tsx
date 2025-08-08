@@ -303,7 +303,15 @@ export default function UniversityDashboard() {
                   }
                   userType="university"
                 />
-                <Button variant="outline" className="w-full border-emerald-200 text-emerald-600 hover:bg-emerald-50">
+                <Button className="w-full" onClick={() => navigate('/university-cms')}>
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  Open CMS
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full border-emerald-200 text-emerald-600 hover:bg-emerald-50"
+                  onClick={() => navigate(`/universities?university=${user?.id}`)}
+                >
                   <ExternalLink className="h-4 w-4 mr-2" />
                   View Public Profile
                 </Button>
