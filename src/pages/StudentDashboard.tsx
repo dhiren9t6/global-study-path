@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProfileDialog } from "@/components/dashboard/ProfileDialog";
+import { AIAssistant } from "@/components/dashboard/AIAssistant";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -657,6 +658,9 @@ export default function StudentDashboard() {
                 </Tabs>
               </CardContent>
             </Card>
+
+            {/* AI Assistant Section */}
+            <AIAssistant userId={user?.id || ''} documents={documents.filter(doc => doc.status === 'uploaded')} />
           </div>
         </div>
       </div>
