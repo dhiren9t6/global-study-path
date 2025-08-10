@@ -63,7 +63,7 @@ export default function AnalyticsDashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50/50 to-purple-50/50">
+    <div className="min-h-screen bg-muted/30">
       <div className="container py-8 px-4">
         {/* Header */}
         <div className="mb-8">
@@ -88,7 +88,7 @@ export default function AnalyticsDashboard() {
 
         {/* Key Metrics */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
-          <Card className="glass border-border/50 bg-gradient-to-br from-blue-500/10 to-cyan-500/10">
+          <Card className="shadow-medium border-border/50">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -106,7 +106,7 @@ export default function AnalyticsDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="glass border-border/50 bg-gradient-to-br from-emerald-500/10 to-teal-500/10">
+          <Card className="shadow-medium border-border/50">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -124,7 +124,7 @@ export default function AnalyticsDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="glass border-border/50 bg-gradient-to-br from-purple-500/10 to-pink-500/10">
+          <Card className="shadow-medium border-border/50">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -142,7 +142,7 @@ export default function AnalyticsDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="glass border-border/50 bg-gradient-to-br from-amber-500/10 to-orange-500/10">
+          <Card className="shadow-medium border-border/50">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -163,7 +163,7 @@ export default function AnalyticsDashboard() {
 
         <div className="grid gap-6 lg:grid-cols-2 mb-8">
           {/* Program Performance */}
-          <Card className="glass border-border/50 bg-gradient-to-br from-indigo-500/5 to-blue-500/5">
+          <Card className="shadow-medium border-border/50">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-indigo-600">
                 <Award className="h-5 w-5" />
@@ -198,7 +198,7 @@ export default function AnalyticsDashboard() {
           </Card>
 
           {/* Geographic Distribution */}
-          <Card className="glass border-border/50 bg-gradient-to-br from-green-500/5 to-emerald-500/5">
+          <Card className="shadow-medium border-border/50">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2 text-emerald-600">
                 <Globe2 className="h-5 w-5" />
@@ -228,7 +228,7 @@ export default function AnalyticsDashboard() {
         </div>
 
         {/* Monthly Trends */}
-        <Card className="glass border-border/50 bg-gradient-to-br from-violet-500/5 to-purple-500/5">
+        <Card className="shadow-medium border-border/50">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2 text-violet-600">
               <Calendar className="h-5 w-5" />
@@ -267,7 +267,7 @@ export default function AnalyticsDashboard() {
 
         {/* Real-time Insights */}
         <div className="mt-8 grid gap-6 md:grid-cols-3">
-          <Card className="glass border-border/50 bg-gradient-to-br from-rose-500/5 to-pink-500/5">
+          <Card className="shadow-medium border-border/50">
             <CardContent className="p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 bg-rose-100 rounded-lg">
@@ -283,7 +283,7 @@ export default function AnalyticsDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="glass border-border/50 bg-gradient-to-br from-teal-500/5 to-cyan-500/5">
+          <Card className="shadow-medium border-border/50">
             <CardContent className="p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 bg-teal-100 rounded-lg">
@@ -299,7 +299,7 @@ export default function AnalyticsDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="glass border-border/50 bg-gradient-to-br from-orange-500/5 to-amber-500/5">
+          <Card className="shadow-medium border-border/50">
             <CardContent className="p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 bg-orange-100 rounded-lg">
