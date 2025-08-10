@@ -14,6 +14,141 @@ export type Database = {
   }
   public: {
     Tables: {
+      student_applications: {
+        Row: {
+          application_date: string
+          created_at: string
+          id: string
+          notes: string | null
+          program_id: string | null
+          status: string
+          university_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          application_date?: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          program_id?: string | null
+          status?: string
+          university_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          application_date?: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          program_id?: string | null
+          status?: string
+          university_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      student_documents: {
+        Row: {
+          created_at: string
+          document_type: string
+          file_name: string | null
+          file_url: string | null
+          id: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          document_type: string
+          file_name?: string | null
+          file_url?: string | null
+          id?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          document_type?: string
+          file_name?: string | null
+          file_url?: string | null
+          id?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      student_profiles: {
+        Row: {
+          bio: string | null
+          country: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          gpa: string | null
+          id: string
+          phone: string | null
+          specialization: string | null
+          updated_at: string
+          user_id: string
+          year_of_study: string | null
+        }
+        Insert: {
+          bio?: string | null
+          country?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          gpa?: string | null
+          id?: string
+          phone?: string | null
+          specialization?: string | null
+          updated_at?: string
+          user_id: string
+          year_of_study?: string | null
+        }
+        Update: {
+          bio?: string | null
+          country?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          gpa?: string | null
+          id?: string
+          phone?: string | null
+          specialization?: string | null
+          updated_at?: string
+          user_id?: string
+          year_of_study?: string | null
+        }
+        Relationships: []
+      }
+      student_saved_universities: {
+        Row: {
+          created_at: string
+          id: string
+          university_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          university_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          university_id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       university_analytics_events: {
         Row: {
           actor_id: string | null
