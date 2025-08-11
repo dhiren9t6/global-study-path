@@ -659,8 +659,238 @@ export default function StudentDashboard() {
               </CardContent>
             </Card>
 
-            {/* AI Assistant Section */}
-            <AIAssistant userId={user?.id || ''} documents={documents.filter(doc => doc.status === 'uploaded')} />
+            {/* AI Recommendations & Assistant */}
+            <Card className="border-border/50 shadow-medium">
+              <CardHeader>
+                <div className="flex items-center gap-2">
+                  <Brain className="h-5 w-5 text-primary" />
+                  <CardTitle>AI University Assistant</CardTitle>
+                </div>
+                <CardDescription>
+                  Get personalized recommendations and guidance for your university applications
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Tabs defaultValue="recommendations" className="w-full">
+                  <TabsList className="grid w-full grid-cols-3">
+                    <TabsTrigger value="recommendations" className="flex items-center gap-1">
+                      <GraduationCap className="h-4 w-4" />
+                      Recommendations
+                    </TabsTrigger>
+                    <TabsTrigger value="documents" className="flex items-center gap-1">
+                      <FileText className="h-4 w-4" />
+                      Document Analysis
+                    </TabsTrigger>
+                    <TabsTrigger value="assistant" className="flex items-center gap-1">
+                      <Brain className="h-4 w-4" />
+                      AI Assistant
+                    </TabsTrigger>
+                  </TabsList>
+
+                  <TabsContent value="recommendations" className="space-y-6">
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold flex items-center gap-2">
+                        <Star className="h-5 w-5 text-primary" />
+                        Recommended Universities
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        Based on your profile, preferences, and academic background
+                      </p>
+                      
+                      <div className="grid gap-4 md:grid-cols-2">
+                        {mockUniversities.slice(0, 4).map((uni) => (
+                          <Card key={uni.id} className="hover:shadow-medium transition-all duration-300 border-border/50">
+                            <CardContent className="p-4">
+                              <div className="flex items-start justify-between mb-3">
+                                <div className="flex items-center gap-3">
+                                  <div className="text-2xl">{uni.logo}</div>
+                                  <div>
+                                    <h4 className="font-medium">{uni.name}</h4>
+                                    <p className="text-sm text-muted-foreground">{uni.location}</p>
+                                  </div>
+                                </div>
+                                <Badge variant="secondary" className="bg-primary/10 text-primary">
+                                  {uni.match}% match
+                                </Badge>
+                              </div>
+                              
+                              <div className="space-y-2 text-sm">
+                                <div className="flex justify-between">
+                                  <span className="text-muted-foreground">Program:</span>
+                                  <span className="font-medium">{uni.program}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-muted-foreground">Tuition:</span>
+                                  <span className="font-medium">{uni.tuition}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-muted-foreground">Ranking:</span>
+                                  <span className="font-medium">{uni.ranking}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-muted-foreground">Deadline:</span>
+                                  <span className="font-medium text-destructive">{uni.deadline}</span>
+                                </div>
+                              </div>
+                              
+                              <div className="flex gap-2 mt-4">
+                                <Button variant="outline" size="sm" className="flex-1">
+                                  View Details
+                                </Button>
+                                <Button size="sm" className="flex-1">
+                                  Apply Now
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </div>
+                      
+                      <div className="mt-6 p-4 bg-secondary/50 rounded-lg">
+                        <h4 className="font-semibold mb-3 flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-primary" />
+                          AI Insights
+                        </h4>
+                        <div className="space-y-2 text-sm">
+                          <p>• Your profile shows strong potential for Computer Science programs in North America</p>
+                          <p>• Consider applying to 3-4 reach schools, 3-4 target schools, and 2-3 safety schools</p>
+                          <p>• Your IELTS score qualifies you for top-tier universities</p>
+                          <p>• Early application deadlines are approaching - prioritize your top choices</p>
+                        </div>
+                      </div>
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="documents" className="space-y-4">
+                    <div className="space-y-3">
+                      <h3 className="text-lg font-semibold">Document Analysis</h3>
+                      <p className="text-sm text-muted-foreground">
+                        AI-powered feedback on your uploaded documents
+                      </p>
+                      
+                      {documents.filter(doc => doc.status === 'uploaded').length > 0 ? (
+                        <div className="space-y-4">
+                          {documents.filter(doc => doc.status === 'uploaded').map((doc) => (
+                            <Card key={doc.id} className="border-border/50">
+                              <CardContent className="p-4">
+                                <div className="flex items-center justify-between mb-3">
+                                  <div className="flex items-center gap-3">
+                                    <FileText className="h-4 w-4 text-muted-foreground" />
+                                    <div>
+                                      <p className="font-medium">{doc.file_name}</p>
+                                      <Badge variant="outline" className="text-xs">
+                                        {doc.document_type}
+                                      </Badge>
+                                    </div>
+                                  </div>
+                                  <Button size="sm" variant="outline">
+                                    Analyze
+                                  </Button>
+                                </div>
+                                
+                                {/* Spoof AI Analysis */}
+                                <div className="mt-3 p-3 bg-secondary/30 rounded-lg">
+                                  <h5 className="font-medium text-sm mb-2">AI Analysis:</h5>
+                                  <div className="text-sm space-y-1">
+                                    {doc.document_type === 'Personal Statement' && (
+                                      <>
+                                        <p className="text-success">✓ Strong opening statement that clearly demonstrates motivation</p>
+                                        <p className="text-warning">⚠ Consider adding more specific examples of leadership experience</p>
+                                        <p className="text-muted-foreground">• Length: Optimal (2 pages)</p>
+                                        <p className="text-muted-foreground">• Tone: Professional and engaging</p>
+                                      </>
+                                    )}
+                                    {doc.document_type === 'CV/Resume' && (
+                                      <>
+                                        <p className="text-success">✓ Well-structured with clear sections</p>
+                                        <p className="text-warning">⚠ Add more quantified achievements in work experience</p>
+                                        <p className="text-muted-foreground">• Format: ATS-friendly</p>
+                                        <p className="text-muted-foreground">• Skills section: Comprehensive</p>
+                                      </>
+                                    )}
+                                    {doc.document_type === 'Academic Transcripts' && (
+                                      <>
+                                        <p className="text-success">✓ Strong GPA demonstrates academic excellence</p>
+                                        <p className="text-success">✓ Relevant coursework aligns with target programs</p>
+                                        <p className="text-muted-foreground">• Overall GPA: 3.8/4.0</p>
+                                        <p className="text-muted-foreground">• Relevant courses: 15 credits</p>
+                                      </>
+                                    )}
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="text-center py-8 text-muted-foreground">
+                          <FileText className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                          <p>Upload documents to get AI analysis</p>
+                        </div>
+                      )}
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="assistant" className="space-y-4">
+                    <div className="space-y-4">
+                      <h3 className="text-lg font-semibold">AI Admissions Assistant</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Ask questions about study destinations, scholarships, or admission processes
+                      </p>
+                      
+                      <div className="space-y-4">
+                        <div className="p-4 bg-secondary/30 rounded-lg">
+                          <h4 className="font-medium mb-2">Quick Questions</h4>
+                          <div className="grid gap-2">
+                            <Button variant="outline" size="sm" className="justify-start text-left h-auto p-3">
+                              What scholarships are available for international students in Canada?
+                            </Button>
+                            <Button variant="outline" size="sm" className="justify-start text-left h-auto p-3">
+                              How do I prepare for university interviews?
+                            </Button>
+                            <Button variant="outline" size="sm" className="justify-start text-left h-auto p-3">
+                              What's the difference between conditional and unconditional offers?
+                            </Button>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-3">
+                          <div className="flex gap-2">
+                            <Input 
+                              placeholder="Ask me anything about university admissions..."
+                              className="flex-1"
+                            />
+                            <Button>
+                              <Brain className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                        
+                        {/* Spoof AI Response */}
+                        <div className="p-4 bg-secondary/50 rounded-lg">
+                          <h4 className="font-semibold mb-2">AI Response:</h4>
+                          <div className="text-sm space-y-2">
+                            <p>Based on your profile and preferences for Computer Science programs in Canada, here are some key insights:</p>
+                            <p><strong>Top Scholarships:</strong></p>
+                            <ul className="list-disc list-inside space-y-1 ml-2">
+                              <li>Vanier Canada Graduate Scholarships (up to $50,000/year)</li>
+                              <li>Ontario Graduate Scholarship (up to $15,000/year)</li>
+                              <li>University-specific merit scholarships (varies by institution)</li>
+                            </ul>
+                            <p><strong>Application Tips:</strong></p>
+                            <ul className="list-disc list-inside space-y-1 ml-2">
+                              <li>Apply early - many scholarships have January deadlines</li>
+                              <li>Highlight your research interests and relevant experience</li>
+                              <li>Get strong letters of recommendation from professors</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </TabsContent>
+                </Tabs>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

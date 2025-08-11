@@ -270,49 +270,49 @@ export default function AnalyticsDashboard() {
           <Card className="shadow-medium border-border/50">
             <CardContent className="p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-rose-100 rounded-lg">
-                  <Clock className="h-5 w-5 text-rose-600" />
+                <div className="p-2 bg-destructive/10 rounded-lg">
+                  <Clock className="h-5 w-5 text-destructive" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-rose-700">Peak Hours</h3>
-                  <p className="text-sm text-rose-500">Most active time</p>
+                  <h3 className="font-semibold text-destructive">Peak Hours</h3>
+                  <p className="text-sm text-muted-foreground">Most active time</p>
                 </div>
               </div>
-              <p className="text-xl font-bold text-rose-600">2-4 PM EST</p>
-              <p className="text-sm text-rose-500 mt-1">+35% activity during this window</p>
+              <p className="text-xl font-bold text-destructive">2-4 PM EST</p>
+              <p className="text-sm text-muted-foreground mt-1">+35% activity during this window</p>
             </CardContent>
           </Card>
 
           <Card className="shadow-medium border-border/50">
             <CardContent className="p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-teal-100 rounded-lg">
-                  <BookmarkCheck className="h-5 w-5 text-teal-600" />
+                <div className="p-2 bg-success/10 rounded-lg">
+                  <BookmarkCheck className="h-5 w-5 text-success" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-teal-700">Save Rate</h3>
-                  <p className="text-sm text-teal-500">Programs bookmarked</p>
+                  <h3 className="font-semibold text-success">Save Rate</h3>
+                  <p className="text-sm text-muted-foreground">Programs bookmarked</p>
                 </div>
               </div>
-              <p className="text-xl font-bold text-teal-600">{((metrics.savedByStudents / metrics.totalViews) * 100).toFixed(1)}%</p>
-              <p className="text-sm text-teal-500 mt-1">Students saving programs</p>
+              <p className="text-xl font-bold text-success">{((metrics.savedByStudents / metrics.totalViews) * 100).toFixed(1)}%</p>
+              <p className="text-sm text-muted-foreground mt-1">Students saving programs</p>
             </CardContent>
           </Card>
 
           <Card className="shadow-medium border-border/50">
             <CardContent className="p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-orange-100 rounded-lg">
-                  <Activity className="h-5 w-5 text-orange-600" />
+                <div className="p-2 bg-warning/10 rounded-lg">
+                  <Activity className="h-5 w-5 text-warning" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-orange-700">Live Status</h3>
-                  <p className="text-sm text-orange-500">Current activity</p>
+                  <h3 className="font-semibold text-warning">Live Status</h3>
+                  <p className="text-sm text-muted-foreground">Current activity</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
-                <p className="text-sm font-medium text-orange-600">
+                <div className="w-3 h-3 bg-success rounded-full animate-pulse"></div>
+                <p className="text-sm font-medium text-warning">
                   {Math.floor(Math.random() * 15) + 5} users browsing
                 </p>
               </div>
