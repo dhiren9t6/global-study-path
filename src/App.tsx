@@ -14,7 +14,8 @@ import StudentDashboard from "./pages/StudentDashboard";
 import UniversityDashboard from "./pages/UniversityDashboard";
 import AnalyticsDashboard from "./pages/AnalyticsDashboard";
 import BrowseUniversities from "./pages/BrowseUniversities";
-
+import UniversityDetails from "./pages/UniversityDetails";
+import Resources from "./pages/Resources";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -66,6 +67,8 @@ function AppContent() {
             } 
           />
           <Route path="/universities" element={<BrowseUniversities />} />
+          <Route path="/university/:id" element={<UniversityDetails />} />
+          <Route path="/resources" element={<Resources />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

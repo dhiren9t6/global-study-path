@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { Edit, User, Building2, Globe, Mail, Phone, MapPin } from "lucide-react";
 
 interface ProfileDialogProps {
@@ -20,18 +21,90 @@ export function ProfileDialog({ trigger, userType }: ProfileDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: user?.user_metadata?.full_name || "",
-    email: user?.email || "",
-    phone: user?.user_metadata?.phone || "",
-    country: user?.user_metadata?.country || "",
-    bio: user?.user_metadata?.bio || "",
-    institution: user?.user_metadata?.institution || "",
-    position: user?.user_metadata?.position || "",
-    website: user?.user_metadata?.website || "",
-    specialization: user?.user_metadata?.specialization || "",
-    yearOfStudy: user?.user_metadata?.year_of_study || "",
-    gpa: user?.user_metadata?.gpa || ""
+    fullName: "",
+    email: "",
+    phone: "",
+    country: "",
+    bio: "",
+    institution: "",
+    position: "",
+    website: "",
+    specialization: "",
+    yearOfStudy: "",
+    gpa: ""
   });
+
+  // Load existing profile data when dialog opens
+  useEffect(() => {
+    if (isOpen && user) {
+      loadProfileData();
+    }
+  }, [isOpen, user]);
+
+  const loadProfileData = async () => {
+    if (!user) return;
+
+    try {
+      if (userType === 'student') {
+        const { data } = await supabase
+          .from('student_profiles')
+          .select('*')
+          .eq('user_id', user.id)
+          .maybeSingle();
+
+        if (data) {
+          setFormData({
+            fullName: data.full_name || "",
+            email: data.email || user.email || "",
+            phone: data.phone || "",
+            country: data.country || "",
+            bio: data.bio || "",
+            institution: "",
+            position: "",
+            website: "",
+            specialization: data.specialization || "",
+            yearOfStudy: data.year_of_study || "",
+            gpa: data.gpa || ""
+          });
+        } else {
+          // Set defaults for new profile
+          setFormData(prev => ({
+            ...prev,
+            email: user.email || ""
+          }));
+        }
+      } else {
+        const { data } = await supabase
+          .from('university_profiles')
+          .select('*')
+          .eq('id', user.id)
+          .maybeSingle();
+
+        if (data) {
+          setFormData({
+            fullName: data.name || "",
+            email: data.contact_email || user.email || "",
+            phone: data.phone || "",
+            country: "",
+            bio: data.description || "",
+            institution: data.name || "",
+            position: "",
+            website: data.website || "",
+            specialization: "",
+            yearOfStudy: "",
+            gpa: ""
+          });
+        } else {
+          setFormData(prev => ({
+            ...prev,
+            email: user.email || ""
+          }));
+        }
+      }
+    } catch (error) {
+      console.error('Error loading profile:', error);
+    }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
@@ -45,15 +118,42 @@ export function ProfileDialog({ trigger, userType }: ProfileDialogProps) {
     setIsLoading(true);
 
     try {
-      // Simulate profile update
-      setTimeout(() => {
-        setIsLoading(false);
-        setIsOpen(false);
-        toast({
-          title: "Profile Updated",
-          description: "Your profile has been successfully updated.",
-        });
-      }, 1000);
+      if (userType === 'student') {
+        await supabase
+          .from('student_profiles')
+          .upsert({
+            user_id: user.id,
+            full_name: formData.fullName,
+            email: formData.email,
+            phone: formData.phone,
+            country: formData.country,
+            bio: formData.bio,
+            specialization: formData.specialization,
+            year_of_study: formData.yearOfStudy,
+            gpa: formData.gpa
+          });
+      } else {
+        await supabase
+          .from('university_profiles')
+          .upsert({
+            id: user.id,
+            name: formData.fullName || formData.institution,
+            contact_email: formData.email,
+            phone: formData.phone,
+            description: formData.bio,
+            website: formData.website
+          });
+      }
+
+      setIsLoading(false);
+      setIsOpen(false);
+      toast({
+        title: "Profile Updated",
+        description: "Your profile has been successfully updated.",
+      });
+      
+      // Refresh the page to show updated data
+      window.location.reload();
     } catch (error) {
       setIsLoading(false);
       toast({

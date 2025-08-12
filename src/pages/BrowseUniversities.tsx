@@ -155,7 +155,7 @@ export default function BrowseUniversities() {
                       </a>
                     )}
                     <Link
-                      to={`/university-dashboard`}
+                      to={`/university/${u.id}`}
                       className="ml-auto text-sm text-muted-foreground hover:text-foreground"
                     >
                       View details

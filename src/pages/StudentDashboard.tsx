@@ -336,28 +336,41 @@ export default function StudentDashboard() {
         <div className="grid gap-6 lg:grid-cols-3">
           {/* Left Column - Profile & Documents */}
           <div className="space-y-6">
-            {/* Profile Completion */}
+            {/* Profile Section */}
             <Card className="shadow-medium border-border/50">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <GraduationCap className="h-5 w-5" />
-                  <span>Profile Completion</span>
+                  <User className="h-5 w-5" />
+                  <span>My Profile</span>
                 </CardTitle>
-                <CardDescription>Complete your profile to get better recommendations</CardDescription>
+                <CardDescription>Manage your profile information</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span>Progress</span>
-                    <span>{profileCompleteness}%</span>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted-foreground">Status:</span>
+                    <Badge variant={profileCompleteness >= 80 ? "default" : "secondary"}>
+                      {profileCompleteness >= 80 ? "Complete" : "Incomplete"}
+                    </Badge>
                   </div>
-                  <Progress value={profileCompleteness} className="h-2" />
+                  {profile && (
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Name:</span>
+                        <span>{profile.full_name || "Not set"}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Specialization:</span>
+                        <span>{profile.specialization || "Not set"}</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <ProfileDialog 
                   trigger={
                     <Button variant="outline" className="w-full">
                       <Settings className="h-4 w-4 mr-2" />
-                      Complete Profile
+                      Edit Profile
                     </Button>
                   }
                   userType="student"
