@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { 
   ArrowLeft, 
@@ -107,7 +107,7 @@ export default function UniversityDetails() {
       toast({
         title: "Login Required",
         description: "Please login to save universities",
-        variant: "destructive"
+        variant: "default"
       });
       return;
     }
@@ -139,9 +139,9 @@ export default function UniversityDetails() {
       }
     } catch (error) {
       toast({
-        title: "Error",
+        title: "Update",
         description: error.message,
-        variant: "destructive"
+        variant: "default"
       });
     }
   };
@@ -151,7 +151,7 @@ export default function UniversityDetails() {
       toast({
         title: "Login Required",
         description: "Please login to apply to programs",
-        variant: "destructive"
+        variant: "default"
       });
       return;
     }
@@ -174,7 +174,7 @@ export default function UniversityDetails() {
       toast({
         title: "Application failed",
         description: error.message,
-        variant: "destructive"
+        variant: "default"
       });
     }
   };

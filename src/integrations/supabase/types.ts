@@ -128,6 +128,70 @@ export type Database = {
         }
         Relationships: []
       }
+      student_university_shared_documents: {
+        Row: {
+          id: string
+          student_id: string
+          university_id: string
+          application_id: string | null
+          document_id: string
+          shared_at: string
+          status: string
+          university_notes: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          student_id: string
+          university_id: string
+          application_id?: string | null
+          document_id: string
+          shared_at?: string
+          status?: string
+          university_notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          student_id?: string
+          university_id?: string
+          application_id?: string | null
+          document_id?: string
+          shared_at?: string
+          status?: string
+          university_notes?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_university_shared_documents_student_id_fkey"
+            columns: ["student_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "student_university_shared_documents_university_id_fkey"
+            columns: ["university_id"]
+            referencedRelation: "university_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "student_university_shared_documents_application_id_fkey"
+            columns: ["application_id"]
+            referencedRelation: "student_applications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "student_university_shared_documents_document_id_fkey"
+            columns: ["document_id"]
+            referencedRelation: "student_documents"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       student_saved_universities: {
         Row: {
           created_at: string
@@ -234,42 +298,63 @@ export type Database = {
       }
       university_programs: {
         Row: {
+          additional_criteria: string | null
           application_deadline: string | null
           created_at: string
           degree_level: string | null
           delivery_mode: string | null
           description: string | null
           duration: string | null
+          has_scholarships: boolean | null
           id: string
           is_published: boolean
+          scholarship_amount: string | null
+          scholarship_criteria: string | null
+          scholarship_percentage: string | null
+          scholarship_type: string | null
+          special_requirements: string | null
           title: string
           tuition_fee: string | null
           university_id: string
           updated_at: string
         }
         Insert: {
+          additional_criteria?: string | null
           application_deadline?: string | null
           created_at?: string
           degree_level?: string | null
           delivery_mode?: string | null
           description?: string | null
           duration?: string | null
+          has_scholarships?: boolean | null
           id?: string
           is_published?: boolean
+          scholarship_amount?: string | null
+          scholarship_criteria?: string | null
+          scholarship_percentage?: string | null
+          scholarship_type?: string | null
+          special_requirements?: string | null
           title: string
           tuition_fee?: string | null
           university_id: string
           updated_at?: string
         }
         Update: {
+          additional_criteria?: string | null
           application_deadline?: string | null
           created_at?: string
           degree_level?: string | null
           delivery_mode?: string | null
           description?: string | null
           duration?: string | null
+          has_scholarships?: boolean | null
           id?: string
           is_published?: boolean
+          scholarship_amount?: string | null
+          scholarship_criteria?: string | null
+          scholarship_percentage?: string | null
+          scholarship_type?: string | null
+          special_requirements?: string | null
           title?: string
           tuition_fee?: string | null
           university_id?: string
