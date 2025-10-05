@@ -1,73 +1,110 @@
-# Welcome to your Lovable project
+# 🎓 AI-Powered University Recommendation Web App
 
-## Project info
+## 📌 Overview
 
-**URL**: https://lovable.dev/projects/ef0b6aa2-47bb-4066-9aee-3c4dc7c640a3
+This web app helps students find the **best universities and courses** based on their profile and documents.
+The AI **only recommends universities listed in our database** (stored in Supabase) — it never pulls random results from the internet.
 
-## How can I edit this code?
+**For Students:**
 
-There are several ways of editing your application.
+* Upload academic documents (degrees, CV, IELTS scores, etc.)
+* Set preferences (location, fees range, program type)
+* Get **AI-generated recommendations** from universities listed on our platform only
 
-**Use Lovable**
+**For Universities:**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ef0b6aa2-47bb-4066-9aee-3c4dc7c640a3) and start prompting.
+* Post course offerings, intake dates, fees, scholarships, and other perks
+* Reach interested students directly through the platform
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🚀 Features
 
-Follow these steps:
+### Student Login
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+* Upload academic and supporting documents
+* Set preferred location, course type, and budget
+* Get AI recommendations from **our listed universities only**
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### University Login
 
-# Step 3: Install the necessary dependencies.
-npm i
+* Add and manage university listings
+* Upload details about courses, fees, intake dates, and scholarships
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+### AI Recommendation Engine
+
+* Reads student profile & preferences
+* Filters universities from **Supabase DB only**
+* Suggests the **top matches** with explanations
+* Never invents fake universities or data
+
+---
+
+## ⚡ How It Works
+
+1. **Student Profile Creation**
+   Student uploads documents and enters preferences.
+
+2. **Database Query**
+   Backend queries **Supabase** for matching universities based on filters (location, fees, course type).
+
+3. **AI Processing**
+   Gemini API is given **only the filtered university data** and the student profile.
+
+   * AI ranks the best matches
+   * AI outputs a clear recommendation list
+
+4. **Output Display**
+   Recommendations are shown in a clean, modern UI with university details.
+
+---
+
+## 🔒 Preventing AI Hallucinations
+
+We ensure accuracy by:
+
+* **Not** letting AI search online
+* Only feeding AI the data retrieved from Supabase
+* Adding explicit rules in the prompt:
+
+  > "Recommend ONLY from the provided list. If no match is found, say 'No suitable match found.'"
+
+---
+
+---
+
+## 📡 Example AI Call
+
+```javascript
+const prompt = `
+You are an AI assistant that recommends universities ONLY from the provided list.
+
+Student details:
+${JSON.stringify(studentProfile)}
+
+Available universities:
+${JSON.stringify(universities)}
+
+Rules:
+- Recommend ONLY from the list
+- If no match, reply "No suitable match found"
+`;
+
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+const result = await model.generateContent(prompt);
+console.log(result.response.text());
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🏆 Hackathon Theme Alignment
 
-**Use GitHub Codespaces**
+**Theme:** *Reimagining Education: Accessible, Engaging & Future-Ready Learning*
+This project empowers students to make informed decisions, connects them directly with universities, and leverages AI to simplify the complex process of higher education selection.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/ef0b6aa2-47bb-4066-9aee-3c4dc7c640a3) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+If you want, I can now add a **full working example** of Supabase → Gemini AI → Recommendations using dummy data so you can run it instantly and see it work. That would make testing super quick.
+Would you like me to prepare that?
