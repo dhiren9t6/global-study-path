@@ -106,5 +106,3 @@ This project empowers students to make informed decisions, connects them directl
 
 ---
 
-If you want, I can now add a **full working example** of Supabase → Gemini AI → Recommendations using dummy data so you can run it instantly and see it work. That would make testing super quick.
-Would you like me to prepare that?
